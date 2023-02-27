@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+.navegador {
+    display: flex;
+}
+
+.nav-link {
+    font-size: 15px;
+    margin: 0 5px;
+
+}
+.slider {
+    font-size: 40px;
+}
+
+a {
+    margin: 10px !important;
+}
+
+.logo {
+    width: 150px;
+    height: 40px;
+}
+
+.slide {
+    background-color: #F7DAE3;
+    border: 1px solid gainsboro;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+}
+
+.carousel-item {
+    margin-top: 5px;
+}
+
+.visually-hidden {
+    color: black;
+    background-color: black;
+
+}
+
+section {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
+}
+
+.form-control {
+    background-color: whitesmoke;
+}
+
+.btn-outline-success,
+.btn-primary {
+    background-color: #F26E61;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+}
+
+.btn-outline-success:hover {
+    background-color: #D189A1;
+    border: 1px solid #D189A1;
+}
+
+.cbox {
+    margin-right: 10px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 50px 150px 50px 150px;
+}
+
+.card {
+    margin-top: 10px;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.card-img-top {
+    height: 150px;
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.foot {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #F7DAE3;
+    height: 150px;
+}
+.foot1 {
+    display: flex;
+    height: 25px;
+}
+
+.links {
+    font-size: 15px;
+}
+
+.ico {
+    display: flex;
+    height: 25px;
+    width: 25px;
+    margin: 0 0 0 0;
+    display: flex;
+}
+.datfoot { margin-top: 30px;
+
+}
+li {
+    display: inline;
+}
+/* FORMULARIO */
+.form {
+    display: flex;
+    justify-content: center;
+}
+
+.dates {
+    margin: 50px 150px 50px 150px;
+    width: 500px;
+
+}
+
+.message {
+    height: 100px;
+}
+
+/* FORMULARIO */
+
+/* TABLA */
+.tabla {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    margin: 50px 0 50px 0;
+
+}
+
+table {
+    border: 1px solid whitesmoke;
+
+}
+
+th {
+    border: 1px solid #F7DAE3;
+    height: 20px;
+    width: 400px;
+    font-weight: 500;
+    padding: 0 5px;
+}
+
+.tit {
+    background-color: #DB8C8A;
+    height: 30px;
+    font-size: 25;
+    font-weight: 800;
+}
+
+/* TABLA */
+
+/* DETAILS */
+.details {
+    display: flex;
+    justify-content: center;
+}
+.rounded-start{
+    object-fit: cover;
+}
