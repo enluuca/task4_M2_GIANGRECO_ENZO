@@ -1,219 +1,94 @@
-var data = {
-    "currentDate": "2022-01-01",
-    "events": [
-        {
-            _id: 1,
-            "image": "https://i.postimg.cc/Fs03hQDt/Collectivities-Party.jpg",
-            "name": "Collectivities Party",
-            "date": "2021-12-12",
-            "description": "Enjoy your favourite dishes, from different countries, in a unique event for the whole family.",
-            "category": "Food Fair",
-            "place": "Room A",
-            "capacity": 45000,
-            "assistance": 42756,
-            "price": 5
-        },
-        {
-            _id: 2,
-            "image": "https://i.postimg.cc/ZmD3Xf57/Korean-style.jpg",
-            "name": "Korean style",
-            "date": "2022-08-12",
-            "description": "Enjoy the best Korean dishes, with international chefs and awesome events.",
-            "category": "Food Fair",
-            "place": "Room A",
-            "capacity": 45000,
-            "assistance": 42756,
-            "price": 10
-        },
-        {
-            _id: 3,
-            "image": "https://i.postimg.cc/GmHRkbNV/Jurassic-Park.jpg",
-            "name": "Jurassic Park",
-            "date": "2021-11-02",
-            "description": "Let's go meet the biggest dinosaurs in the paleontology museum.",
-            "category": "Museum",
-            "place": "Field",
-            "capacity": 82000,
-            "assistance": 65892,
-            "price": 15
-        },
-        {
-            _id: 4,
-            "image": "https://i.postimg.cc/c4C2zXm8/Parisian-Museum.jpg",
-            "name": "Parisian Museum",
-            "date": "2022-11-02",
-            "description": "A unique tour in the city of lights, get to know one of the most iconic places.",
-            "category": "Museum",
-            "place": "Paris",
-            "capacity": 8200,
-            "estimate": 8200,
-            "price": 3500
-        },
-        {
-            _id: 5,
-            "image": "https://i.postimg.cc/KYD0jMf2/comicon.jpg",
-            "name": "Comicon",
-            "date": "2021-02-12",
-            "description": "For comic lovers, all your favourite characters gathered in one place.",
-            "category": "Costume Party",
-            "place": "Room C",
-            "capacity": 120000,
-            "assistance": 110000,
-            "price": 54
-        },
-        {
-            _id: 6,
-            "image": "https://i.postimg.cc/RZ9fH4Pr/halloween.jpg",
-            "name": "Halloween Night",
-            "date": "2022-02-12",
-            "description": "Come with your scariest costume and win incredible prizes.",
-            "category": "Costume Party",
-            "place": "Room C",
-            "capacity": 12000,
-            "estimate": 9000,
-            "price": 12
-        },
-        {
-            _id: 7,
-            "image": "https://i.postimg.cc/PrMJ0ZMc/Metallica-in-concert.jpg",
-            "name": "Metallica in concert",
-            "date": "2022-01-22",
-            "description": "The only concert of the most emblematic band in the world.",
-            "category": "Music Concert",
-            "place": "Room A"
-            , "capacity": 138000,
-            "estimate": 138000,
-            "price": 150
-        },
-        {
-            _id: 8,
-            "image": "https://i.postimg.cc/KvsSK8cj/Electronic-Fest.jpg",
-            "name": "Electronic Fest",
-            "date": "2021-01-22",
-            "description": "The best national and international DJs gathered in one place.",
-            "category": "Music Concert",
-            "place": "Room A",
-            "capacity": 138000,
-            "assistance": 110300,
-            "price": 250
-        },
-        {
-            _id: 9,
-            "image": "https://i.postimg.cc/fyLqZY9K/10-K-for-life.jpg",
-            "name": "10K for life",
-            "date": "2021-03-01",
-            "description": "Come and exercise, improve your health and lifestyle.",
-            "category": "Race",
-            "place": "Soccer field",
-            "capacity": 30000,
-            "assistance": 25698,
-            "price": 3
-        },
-        {
-            _id: 10,
-            "image": "https://i.postimg.cc/zv67r65z/15kny.jpg",
-            "name": "15K NY",
-            "date": "2022-03-01",
-            "description": "We'll be raising funds for hospitals and medical care in this unique event held in The Big Apple.",
-            "category": "Race",
-            "place": "New York",
-            "capacity": 3000000,
-            "assistance": 2569800,
-            "price": 3
-        },
-        {
-            _id: 11,
-            "image": "https://i.postimg.cc/Sst763n6/book1.jpg",
-            "name": "School's book fair",
-            "date": "2022-10-15",
-            "description": "Bring your unused school book and take the one you need.",
-            "category": "Book Exchange",
-            "place": "Room D1",
-            "capacity": 150000,
-            "estimate": 123286,
-            "price": 1
-        },
-        {
-            _id: 12,
-            "image": "https://i.postimg.cc/05FhxHVK/book4.jpg",
-            "name": "Just for your kitchen",
-            "date": "2021-11-09",
-            "description": "If you're a gastronomy lover come get the cookbook that best suits your taste and your family's.",
-            "category": "Book Exchange",
-            "place": "Room D6",
-            "capacity": 130000,
-            "assistance": 90000,
-            "price": 100
-        },
-        {
-            _id: 13,
-            "image": "https://i.postimg.cc/vH52y81C/cinema4.jpg",
-            "name": "Batman",
-            "date": "2021-03-11",
-            "description": "Come see Batman fight crime in Gotham City.",
-            "category": "Cinema",
-            "place": "Room D1",
-            "capacity": 11000,
-            "assistance": 9300,
-            "price": 225
-        },
-        {
-            _id: 14,
-            "image": "https://i.postimg.cc/T3C92KTN/scale.jpg",
-            "name": "Avengers",
-            "date": "2022-10-15",
-            "description": "Marvel's Avengers Premier in 3d, the start of an epic saga with your favourite superheroes.",
-            "category": "Cinema",
-            "place": "Room D1",
-            "capacity": 9000,
-            "estimate": 9000,
-            "price": 250
-        }
-    ]
-};
-//EVENTOS 
-let allEvents = []
-eventos(data.events)
+const eventos = data.events
+//capturar elementos
+const cartasContenedor = document.getElementById(cardEvent)
+const input = document.querySelector("input")
+const conteinerChecks = document.getElementById("checkbox")
 
-function eventos(array) {
-    for (let i = 0; i < array.length; i++) {
-        if (array) {
-            allEvents.push(array[i])
-        }
+//Eventos
+
+//Evento search
+input.addEventListener('input', filtroDoble)
+//Evento Cambio checkbox
+conteinerChecks.addEventListener('change', filtroDoble)
+
+
+//Funciones
+//Traer cards
+function traerEventos(arrayDatos) {
+    if (arrayDatos.length == 0) {
+        cardEvent.innerHTML = "<h2 class='display-1 fw-bolder'>Evento no encontrado</h2>"
+        return
     }
-}
-
-console.log(allEvents)
-//EVENTOS 
-
-
-//MOSTRAR TODOS LOS EVENTOS
-function paintDOM(allEvents) {
-    let body = ``;
-    const tagToUpdate = document.getElementById("cardEvent");
-    console.log("tagToUpdate", tagToUpdate);
-
-    for (let i = 0; i < allEvents.length; i++) {
-        body += `
-        <div class="card" style="width: 18rem;">
-                    <img src=${allEvents[i].image} class="card-img-top" alt="...">
+    let cards = ''
+    arrayDatos.forEach(elemento => {
+        cards += `        <div class="card" style="width: 18rem;">
+                    <img src=${elemento.image} class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">${allEvents[i].name}</h5>
-                        <p class="card-text">${allEvents[i].description}</p>
+                        <h5 class="card-title">${elemento.name}</h5>
+                        <p class="card-text">${elemento.description}</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">${allEvents[i].date}</li>
-                        <li class="list-group-item">$ ${allEvents[i].price}</li>
+                        <li class="list-group-item">${elemento.date}</li>
+                        <li class="list-group-item">$ ${elemento.price}</li>
                     </ul>
                     <div class="card-body">
-                        <a href="./details.html" class="card-link">See more</a>
+                        <a href="./details.html?id=${elemento._id}" class="card-link">See more</a>
                     </div>
-                </div>
-        `
-    }
-    tagToUpdate.innerHTML = body
+                </div>`
+    })
+    cardEvent.innerHTML = cards
 }
-paintDOM(allEvents)
 
 
+//Filtro por categoria
+function filtrarCategoria(arrayDatos, texto) {
+    let arrayFiltrado = arrayDatos.filter(elemento => elemento.name.toLowerCase().includes(texto.toLowerCase()))
+    return arrayFiltrado
+}
+//Traer Checkboxes
+function crearCheckboxes(arrayInfo) {
+    let checks = ''
+    let paisesRepetidos = arrayInfo.map(elemento => elemento.category)
+    let paises = new Set(paisesRepetidos.sort((a, b) => {
+        if (a > b) {
+            return 1
+        }
+        if (a < b) {
+            return -1
+        }
+        return 0
+    }))
+    paises.forEach(elemento => {
+        checks += `            <input type="checkbox" name="" id="${elemento}" value="${elemento}">
+            <label  class="cbox"for="${elemento}">${elemento}</label>
+        `
+    })
+    conteinerChecks.innerHTML = checks
+}
+
+//Filtro checkboxes
+function filtraCategoria(arrayInfo) {
+    let checkboxes = document.querySelectorAll("input[type='checkbox']")
+    let arrayChecks = Array.from(checkboxes)
+    let arrayChecksCheked = arrayChecks.filter(check => check.checked)
+    console.log(arrayChecksCheked);
+    if (arrayChecksCheked.length == 0) {
+        return arrayInfo
+    }
+    let checkValues = arrayChecksCheked.map(check => check.value)
+    console.log(checkValues)
+    let arrayFiltrado = arrayInfo.filter(elemento => checkValues.includes(elemento.category))
+    console.log(arrayFiltrado);
+    return arrayFiltrado
+}
+
+//Filtro cruzado search y checkbox
+function filtroDoble() {
+    let arrayFiltrado1 = filtrarCategoria(eventos, input.value)
+    let arrayFiltrado2 = filtraCategoria(arrayFiltrado1)
+    traerEventos(arrayFiltrado2)
+}
+//Ejecutar funciones en array
+traerEventos(eventos)
+crearCheckboxes(eventos)
 
