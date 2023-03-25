@@ -1,36 +1,52 @@
 
-const query = location.search
-//obtener querystring
+let dataArray = []
+//let currentDate = ""
 
-const params = new URLSearchParams(query)
-//acceder a los aprametros de la ruta
-
-
-let idParams = params.get("id")
-console.log(idParams)
-//acceder al ID
+const API_URL = "https://mindhub-xj03.onrender.com/api/amazing"
 
 
-let detailCard = data.events.find(elemento => elemento._id == idParams)
-console.log(detailCard);
+async function getEvents() {
 
-const container = document.getElementById("cardEvento");
-let html = ''
-html += `
-<div class="card mb-3"">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img src="${detailCard.image}" class="img-fluid rounded-start" alt="">
+    try {
+        const response = await fetch(API_URL);
+        const eventsToCatch = await response.json();
+
+        for (const event of eventsToCatch.events) {
+            dataArray.push(event)
+        }
+        //Details
+        let query = location.search
+        let params = new URLSearchParams(query)
+        let idParams = params.get("id")
+        let details = dataArray.find(info => info._id == idParams)
+        console.log(details)
+        let container = document.getElementById("container-detail")
+
+        container.innerHTML += `
+          <div class="row row-cols-2">
+          <div class="col-6">
+            <img src="${dataArray[idParams - 1].image}" class="img-fluid container-sm" >
+          </div>
+          <div class="col-lg-6">
+            <h1>${dataArray[idParams - 1].name}</h1>
+            <h3>${dataArray[idParams - 1].category}</h3>
+            <p> ${dataArray[idParams - 1].description}
+            </p>
+
+            <p> <span class="text-muted">Price: ${dataArray[idParams - 1].price}.</span>
+            </p>
+            <p> <span class="text-muted">Capacity: ${dataArray[idParams - 1].capacity}.</span>
+            
+            </p>
+            <p> <span class="text-muted">Place: ${dataArray[idParams - 1].place}.</span>
+            </p>
+            
         </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">${detailCard.name}</h5>
-                <h5 class="card-title">$${detailCard.price}</h5>
-                <p class="card-text">${detailCard.description}</p>
-                <p class="card-text"><small class="text-muted">${detailCard.date}</small></p>
-            </div>
-        </div>
-    </div>
-</div>
-`
-container.innerHTML = html
+        `
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+getEvents()
