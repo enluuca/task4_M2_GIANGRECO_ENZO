@@ -1,11 +1,17 @@
 const urlAPI = "https://mindhub-xj03.onrender.com/api/amazing"
 let eventos = [];
+let currentDate = "";
+
+
+const UPCAT = document.getElementById("upEvents");
+const PASTCAT = document.getElementById("pastEvents");
+
 
 async function getEvents() {
     try {
         const response = await fetch(urlAPI);
         const dataAPI = await response.json()
-        console.log(dataAPI);
+        //console.log(dataAPI);
 
         for (const event of dataAPI.events) {
             eventos.push(event)
@@ -14,29 +20,18 @@ async function getEvents() {
         currentDate = dataAPI.currentDate
         let pastEvents = eventos.filter(eventos => eventos.date < currentDate)
         let upcomingEvents = eventos.filter(eventos => eventos.date >= currentDate)
-        console.log(pastEvents);
-        console.log(upcomingEvents);
+       // console.log(pastEvents);
+       // console.log(upcomingEvents);
         //Primera tabla con eventos funcionando
         arrayPercentage = getAttendance(pastEvents)
         printStatistics(arrayPercentage, pastEvents)
 
+        getCategories(eventos)
+        upCategoriesStats(eventos)
+        pastCategoriesStats(eventos)
 
-        category = getCategory(eventos);
+
         //Tabla Upcoming Events
-        loadStatsUpComing(upcomingEvents);
-        //Tabla Past Events
-        loadStatsPast(pastEvents)
-
-        //Filtro Categorias (no funciona)
-        getEventsByCategory(categories, eventos)
-        
-        // Ingresos y Porcentajes Upcoming por evento
-        revenuesUpEvents(upcomingEvents);
-        porcentajesUpEvents(upcomingEvents);
-
-        // Ingresos y Porcentajes PastEvents por evento
-        revenuesPast(pastEvents)
-        porcentajesPast(pastEvents)
 
     } catch (error) {
         console.log(error.message);
@@ -80,95 +75,97 @@ function printStatistics(percentages, events) {
      `
 }
 
-
 //Traer categorias
-function getCategory(array) {
-    //Map para mostras categorias unica vez
-    let categorias = array.map(lista => lista.category);
-    const dataA = new Set(categorias);
-    categories = [...dataA];
-    //Funciona
-    console.log(categories);
+function getCategories(eventos) {
+    let categories = [];
+    eventos.forEach(event => {
+        if (!categories.includes(event.category)) {
+            categories.push(event.category);
+        }
 
+    });
+    //console.log(categories);
+    return categories.sort();
+}
+//Filtrar eventos por categorias
+function getEventsByCategory(category, eventos) {
+    return eventos.filter(event => event.category.includes(category));
 }
 
-// Tabla UpcomingEvents
-function loadStatsUpComing(category) {
-    let container = document.getElementById("upEvents");
-    let tableBodyHTML = '';
-    eventos.forEach(evento => {
-        let filtroEventos = getEventsByCategory(categories, eventos); // no funciona
-        let revenuesEvents = revenuesUpEvents(filtroEventos)
-        let porcentajeEvents = porcentajesUpEvents(filtroEventos)
-        tableBodyHTML = `
-        <tr>
-        <td>${categories}</td>
-        <td>${revenuesEvents}</td>
-        <td>${porcentajeEvents}</td>
-        </tr>`
+
+//Porcentaje de asistencia eventos (Pasados)
+function getPastAttendanceByCategory(eventsByCategory) {
+    let attandeance = 0;
+    eventsByCategory.forEach(event => {
+        attandeance += (event.assistance / event.capacity) * 100;
+    });
+    attandeance = (attandeance / eventsByCategory.length).toFixed(2);
+    return attandeance;
+}
+// Ganancias de eventos por categorias (Pasados)
+function getPastRevenuesByCategory(eventsByCategory) {
+    let revenues = 0;
+    eventsByCategory.forEach(event => {
+        revenues += (event.assistance * event.price);
+    });
+    revenues = Math.trunc(revenues);
+    return revenues;
+}
+
+function pastCategoriesStats(eventos) {
+    let pastEvents = eventos.filter(event => event.date < currentDate);
+    let arrayCategories = getCategories(pastEvents);
+    let body = ``;
+    arrayCategories.forEach(category => {
+        let eventsByCat = getEventsByCategory(category, pastEvents);
+        let pastRevenuesByCategory = getPastRevenuesByCategory(eventsByCat);
+        let atByCat = getPastAttendanceByCategory(eventsByCat);
+        body += ` 
+            <tr>
+                <td>${category}</td>
+                <td class="stats">$${pastRevenuesByCategory}</td>
+                <td class="stats">${atByCat}%</td>
+            </tr>
+        `;
     })
-    container.innerHTML = tableBodyHTML
+    PASTCAT.innerHTML = body;
 }
 
-//Categorias incliudas en los eventos 
-function getEventsByCategory(categories, eventos) {
-    let categoryUnica = eventos.filter(evento => evento.category.includes(categories));
-    console.log(categoryUnica);
-    return categoryUnica;
+
+// Asistencia de eventos por categorias (Futuros)
+function getUpAttendanceByCategory(eventsByCategory) {
+    let attandeance = 0;
+    eventsByCategory.forEach(event => {
+        attandeance += (event.estimate / event.capacity) * 100;
+    });
+    attandeance = (attandeance / eventsByCategory.length).toFixed(2);
+    return attandeance;
+}
+// Ganancias de eventos por categorias (Futuros)
+function getUpRevenuesByCategory(eventsByCategory) {
+    let revenues = 0;
+    eventsByCategory.forEach(event => {
+        revenues += (event.estimate * event.price);
+    });
+    revenues = Math.trunc(revenues);
+    return revenues;
 }
 
-//Upcomming Events
-// Array con todos los ingresos (sin unir ingresos por categorias)
-function revenuesUpEvents(array) {
-    let arrayRevenues = array.map(event => {
-        let resutadoRevenue = (event.estimate * event.price);
-        return resutadoRevenue;
+function upCategoriesStats(eventos) {
+    let upEvents = eventos.filter(event => event.date > currentDate);
+    let arrayCategories = getCategories(upEvents);
+    let body = ``;
+    arrayCategories.forEach(category => {
+        let eventsByCat = getEventsByCategory(category, upEvents);
+        let upRevByCat = getUpRevenuesByCategory(eventsByCat);
+        let atByCat = getUpAttendanceByCategory(eventsByCat);
+        body += ` 
+            <tr>
+                <td>${category}</td>
+                <td class="stats">$${upRevByCat}</td>
+                <td class="stats">${atByCat}%</td>
+            </tr>
+        `;
     })
-    console.log(arrayRevenues);
-
+    UPCAT.innerHTML = body;
 }
-function porcentajesUpEvents(array) {
-    let arrayPorcentajes = array.map(event => {
-        let resultadoPorcentaje = ((event.estimate / event.capacity) * 100);
-        return Math.round(resultadoPorcentaje)
-
-    })
-    console.log(arrayPorcentajes);
-}
-// Tabla UpcomingEvents
-function loadStatsPast(category) {
-    let container = document.getElementById("pastEvents");
-    let tableBodyHTML = '';
-    eventos.forEach(evento => {
-        let filtroEventos = getEventsByCategory(categories, eventos);
-        let revenuesEvents = revenuesUpEvents(filtroEventos)
-        let porcentajeEvents = porcentajesUpEvents(filtroEventos)
-        tableBodyHTML = `
-        <tr>
-        <td>${categories}</td>
-        <td>${revenuesEvents}</td>
-        <td>${porcentajeEvents}</td>
-        </tr>`
-    })
-    container.innerHTML = tableBodyHTML
-}
-//PastEvents
-function revenuesPast(array) {
-    let arrayRevenues = array.map(event => {
-    let resutadoRevenue = (event.assistance * event.price);
-        return resutadoRevenue;
-    })
-    console.log(arrayRevenues);
-
-}
-
-function porcentajesPast(array) {
-    let arrayPorcentajes = array.map(event => {
-        let resultadoPorcentaje = ((event.assistance / event.capacity) * 100);
-        return Math.round(resultadoPorcentaje)
-
-    })
-    console.log(arrayPorcentajes);
-}
-
-
